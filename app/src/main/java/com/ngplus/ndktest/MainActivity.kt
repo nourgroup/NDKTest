@@ -15,6 +15,8 @@ import com.ngplus.ndktest.ui.theme.NDKTestTheme
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        System.loadLibrary("native-lib");
+
         setContent {
             NDKTestTheme {
                 // A surface container using the 'background' color from the theme
@@ -22,12 +24,15 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    Greeting("Android")
+                    Greeting(doSomething().toString())
                 }
             }
         }
     }
+    private external fun doSomething() : Int
+
 }
+
 
 @Composable
 fun Greeting(name: String) {
